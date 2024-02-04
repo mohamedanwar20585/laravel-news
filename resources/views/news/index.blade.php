@@ -7,11 +7,19 @@
             {{ session()->get('message') }}
         </div>
     @endif
+    {{-- {{dd($posts->user ? $posts->user->name : 'not found user')}} --}}
     {{-- start all posts --}}
     <div class="container text-center pt-5">
         <h1 class="fw-bold">All News</h1>
     </div>
     <div class="container">
+
+        {{-- {{ dd($categories) }} --}}
+        {{-- {{ dd($posts->categories) }} --}}
+
+        {{-- @foreach ($post->categories as $category)
+            {{ $category->name }}
+        @endforeach --}}
         @foreach ($posts as $post)
             <div class=" col-xxl-8 px-4 py-5">
                 <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
@@ -20,7 +28,12 @@
                             alt="Bootstrap Themes" width="400" height="300" loading="lazy">
                     </div>
                     <div class="col-lg-6 ">
-                        <strong class="d-inline-block mb-2 text-primary-emphasis">Category</strong>
+                        @foreach ($post->categories as $category)
+                            <div>
+                                <strong
+                                    class="d-inline-block mb-2 text-secondary-emphasis">{{ $category->name ? $category->name : 'no category' }}</strong>
+                            </div>
+                        @endforeach
                         <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{ $post->title }}</h1>
                         <div class="mb-1 text-body-secondary">{{ $post->user ? $post->user->name : 'not found user' }}
                         </div>

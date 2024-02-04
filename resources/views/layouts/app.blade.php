@@ -67,8 +67,20 @@
                                 aria-label="Search">
                             <button class="btn btn-outline-secondary rounded-pill" type="submit">Search</button>
                         </form>
-                        @if (Auth::check())
-                            <a class="nav-link text-success " href="{{ route('posts.create') }}">Create News</a>
+                        @if (Auth::check() && Auth::user()->id)
+                            <div class="dropdown m-1  ">
+                                <button class="btn btn-secondary dropdown-toggle btn-sm " type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Dashboard
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="nav-link text-success " href="{{ route('posts.create') }}">Create
+                                            News</a></li>
+                                    <li><a class="nav-link  " href="{{ route('categories.index') }}">Categories News</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </div>
                         @endif
                         @guest
                             @if (Route::has('login'))
@@ -90,6 +102,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -101,6 +114,7 @@
                                     </form>
                                 </div>
                             </li>
+
                         @endguest
                     </ul>
                 </div>
@@ -129,8 +143,10 @@
                     <li class="nav-item"><a class="nav-link px-2 text-body-secondary " href="{{ url('/') }}">
                             {{ config('app.name', 'Laravel') }}
                         </a></li>
-                    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Business</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Arts & Culture</a>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Business</a>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Arts &
+                            Culture</a>
                     </li>
                     <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Sports</a></li>
                     <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">ET Scenes</a>

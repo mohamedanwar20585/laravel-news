@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Models\User;
+// use App\Models\User;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+// use App\Models\Category;
+// use App\Models\PostCategory;
 use Illuminate\Support\Str;
 
 
@@ -17,9 +19,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $postsFormDB = Post::orderBy('id', 'DESC')->get();
+        // $postsFormDB = Post::orderBy('id', 'DESC')->get();
+        $postsFormDB = Post::with('categories')->orderBy('id', 'DESC')->get();
+        // $categoryFormDB = Category::get();
         // dd($postFormDB);
-        return view('news.index', ['posts' => $postsFormDB]);
+        return view('news.index', ['posts' => $postsFormDB/* , 'categories' => $categoryFormDB */]);
         // return view('post.index', ['posts' => $postsFromDB]);
     }
 

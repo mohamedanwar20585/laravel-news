@@ -14,34 +14,41 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item">
-                    <img src="images/bg-dark.jpg" class="d-block w-100" alt="...">
+                    <img src="{{ url('images') }}/{{ $postOne->post_image }}" class="d-block w-100" alt="...">
                     <div class="container">
                         <div class="carousel-caption ">
-                            <h1>Example headline.</h1>
-                            <p class="opacity-75">Some representative placeholder content for the first slide of the
-                                carousel.
+                            <h1>{{ $postOne->title }}</h1>
+                            <p class="opacity-75">{{ $postOne->content }}
                             </p>
-                            <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+                            <p><a class="btn btn-lg btn-primary" href="{{ route('posts.show', $postOne->id) }}">Read
+                                    More</a>
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item active">
-                    <img src="images/bg-dark.jpg" class="d-block w-100" alt="...">
+                    <img src="{{ url('images') }}/{{ $postSecond->post_image }}" class="d-block w-100" alt="...">
                     <div class="container">
                         <div class="carousel-caption">
-                            <h1>Another example headline.</h1>
-                            <p>Some representative placeholder content for the second slide of the carousel.</p>
-                            <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                            {{-- {{ dd($postSecond) }} --}}
+                            <h1>{{ $postSecond->title }}</h1>
+                            <p>{{ $postSecond->content }}</p>
+                            <p><a class="btn btn-lg btn-primary" href="{{ route('posts.show', $postSecond->id) }}">Read
+                                    More</a>
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="images/bg-dark.jpg" class="d-block w-100" alt="...">
+                    <img src="{{ url('images') }}/{{ $postTherd->post_image }}" class="d-block w-100" alt="...">
                     <div class="container">
                         <div class="carousel-caption ">
-                            <h1>One more for good measure.</h1>
-                            <p>Some representative placeholder content for the third slide of this carousel.</p>
-                            <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+
+                            <h1>{{ $postTherd->title }}</h1>
+                            <p>{{ $postTherd->content }}</p>
+                            <p><a class="btn btn-lg btn-primary" href="{{ route('posts.show', $postTherd->id) }}">Read
+                                    More</a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -57,29 +64,31 @@
         </div>
     </div>
     {{-- end Carousel --}}
+
     {{-- start Business --}}
     <div class="container">
         <h4>Business</h4>
-        <div class="album py-3 bg-body-tertiary">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="album py-3 bg-body-tertiary ">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3  ">
                 @foreach ($posts as $post)
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="{{ url('images') }}/{{ $post->post_image }}" class="d-block mx-lg-auto img-fluid"
-                        alt="Bootstrap Themes"width="100%" height="225" loading="lazy">
-                        <div class="card-body">
-                            <h4>{{ $post->title }}</h4>
-                            <p class="card-text">{{ $post->content }}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    <div class="col d-flex align-items-stretch">
+                        <div class="card shadow-sm ">
+                            <img src="{{ url('images') }}/{{ $post->post_image }}" class="d-block mx-lg-auto img-fluid"
+                                alt="Bootstrap Themes"width="100%" height="225" loading="lazy">
+                            <div class="card-body">
+                                <h4>{{ $post->title }}</h4>
+                                <p class="card-text">{{ $post->content }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a type="button" href="{{ route('posts.show', $post->id) }}"
+                                            class="btn btn-sm btn-outline-secondary">View</a>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    </div>
+                                    <small class="text-body-secondary">9 mins</small>
                                 </div>
-                                <small class="text-body-secondary">9 mins</small>
                             </div>
                         </div>
                     </div>
-                </div>
                 @endforeach
             </div>
         </div>
@@ -97,8 +106,8 @@
                             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
                             preserveAspectRatio="xMidYMid slice" focusable="false">
                             <title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%"
-                                fill="#eceeef" dy=".3em">Thumbnail</text>
+                            <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef"
+                                dy=".3em">Thumbnail</text>
                         </svg>
                         <div class="card-body">
                             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2024 at 02:13 PM
+-- Generation Time: Feb 04, 2024 at 01:39 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,59 @@ SET time_zone = "+00:00";
 --
 -- Database: `laravel-project-4-news`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES
+(1, 'Business', 'business', NULL, NULL),
+(2, 'Arts & Culture', 'arts-&-culture', NULL, NULL),
+(3, 'Our Magazine', 'our-magazine', NULL, NULL),
+(4, 'Sports', 'sports', '2024-02-03 17:10:12', '2024-02-03 17:10:12'),
+(5, 'ET Scenes', 'et-scenes', '2024-02-03 17:10:32', '2024-02-03 17:10:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category_post`
+--
+
+CREATE TABLE `category_post` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `category_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `post_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `category_post`
+--
+
+INSERT INTO `category_post` (`id`, `category_id`, `post_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, NULL, NULL),
+(2, 2, 2, NULL, NULL),
+(3, 3, 3, NULL, NULL),
+(4, 4, 4, NULL, NULL),
+(5, 5, 5, NULL, NULL),
+(6, 1, 6, NULL, NULL),
+(7, 1, 7, NULL, NULL),
+(8, 2, 7, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -60,7 +113,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2019_08_19_000000_create_failed_jobs_table', 1),
 (5, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (6, '2024_01_30_192322_create_posts_table', 1),
-(7, '2024_02_01_115457_add_user_id_to_posts_table', 1);
+(7, '2024_02_01_115457_add_user_id_to_posts_table', 1),
+(8, '2024_02_02_195235_create_categories_table', 2),
+(10, '2024_02_04_115122_create_category_post_table', 3);
 
 -- --------------------------------------------------------
 
@@ -166,6 +221,20 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 
 --
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `category_post`
+--
+ALTER TABLE `category_post`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `category_post_category_id_foreign` (`category_id`),
+  ADD KEY `category_post_post_id_foreign` (`post_id`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -217,6 +286,18 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `category_post`
+--
+ALTER TABLE `category_post`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -226,7 +307,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -249,6 +330,13 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `category_post`
+--
+ALTER TABLE `category_post`
+  ADD CONSTRAINT `category_post_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `category_post_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `posts`
