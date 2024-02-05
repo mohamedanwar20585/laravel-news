@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Category;
 
 class HomeController extends Controller
 {
@@ -24,11 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $CategoryFormDBAll = Category::with('posts')->get();
         $postsFormDBAll = Post::orderBy('id', 'DESC')->get();
         $postsFormDB = Post::orderBy('id', 'DESC')->limit(3)->get();
         $postsFormDBFirst = Post::orderBy('id', 'DESC')->first();
         $postsFormDBSecond = Post::orderBy('id', 'DESC')->skip(1)->take(1)->first();
         $postsFormDBTherd = Post::orderBy('id', 'DESC')->skip(2)->take(1)->first();
-        return view('welcome', ['posts' => $postsFormDB, 'postsAll' => $postsFormDBAll, 'postOne' => $postsFormDBFirst, 'postSecond' => $postsFormDBSecond, 'postTherd' => $postsFormDBTherd]);
+        return view('welcome', ['posts' => $postsFormDB, 'postsAll' => $postsFormDBAll, 'postOne' => $postsFormDBFirst, 'postSecond' => $postsFormDBSecond, 'postTherd' => $postsFormDBTherd, 'categories' => $CategoryFormDBAll]);
     }
 }

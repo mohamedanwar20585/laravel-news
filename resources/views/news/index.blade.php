@@ -31,7 +31,7 @@
                         @foreach ($post->categories as $category)
                             <div>
                                 <strong
-                                    class="d-inline-block mb-2 text-secondary-emphasis">{{ $category->name ? $category->name : 'no category' }}</strong>
+                                    class="d-inline-block mb-2 text-secondary-emphasis">{{ $category ? $category->name : 'no category' }}</strong>
                             </div>
                         @endforeach
                         <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{ $post->title }}</h1>

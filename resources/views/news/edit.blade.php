@@ -10,6 +10,7 @@
                         <div class="card-header text-success">
                             Edit News
                         </div>
+                        {{-- {{ dd($categories->pivot_category_id) }} --}}
                         <div class="card-body">
                             <form action="{{ route('posts.update', $post->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
@@ -53,10 +54,15 @@
                                     <label for="category" class="col-md-2 col-form-label text-md-end">Category</label>
 
                                     <div class="col-md-9">
-                                        <select class="form-select" aria-label="Default select example" id="category">
-                                            <option value="">One</option>
-                                            <option value="">Two</option>
-                                            <option value="">Three</option>
+                                        <select class="form-select" name="category" aria-label="Default select example"
+                                            id="createBy">
+
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}">
+                                                    {{ $category->name }}</option>
+                                            @endforeach
+
+
                                         </select>
                                     </div>
                                 </div>
@@ -82,20 +88,20 @@
             </div>
         </div>
     @else
-    <div class="container  pt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header text-success">
-                        Edit News
-                    </div>
-                    <div class="card-body py-5 my-5 text-center text-danger">
-                        please login to your account
+        <div class="container  pt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header text-success">
+                            Edit News
+                        </div>
+                        <div class="card-body py-5 my-5 text-center text-danger">
+                            please login to your account
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     @endif
 
     {{-- end create posts forme --}}

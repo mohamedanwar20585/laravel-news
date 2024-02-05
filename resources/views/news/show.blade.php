@@ -16,7 +16,12 @@
                         alt="Bootstrap Themes" width="700" height="500" loading="lazy">
                 </div>
                 <div class="col-lg-6 overflow-hidden" height="50px">
-                    <strong class="d-inline-block mb-2 text-primary-emphasis">Category</strong>
+                    @foreach ($post->categories as $category)
+                        <div>
+                            <strong
+                                class="d-inline-block mb-2 text-secondary-emphasis">{{ $category ? $category->name : 'no category' }}</strong>
+                        </div>
+                    @endforeach
                     <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{ $post->title }}</h1>
                     <div class="mb-1 text-body-secondary">{{ $post->user ? $post->user->name : 'not found user' }} </div>
                     <div class="mb-1 text-body-secondary">

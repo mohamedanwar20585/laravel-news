@@ -52,10 +52,13 @@
                                     <label for="createBy" class="col-md-2 col-form-label text-md-end">Category</label>
 
                                     <div class="col-md-9">
-                                        <select class="form-select" aria-label="Default select example" id="createBy">
-                                            <option value="">One</option>
-                                            <option value="">Two</option>
-                                            <option value="">Three</option>
+                                        <select class="form-select" name="category" aria-label="Default select example"
+                                            id="createBy">
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endforeach
+
+
                                         </select>
                                     </div>
                                 </div>

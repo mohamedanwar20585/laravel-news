@@ -37,7 +37,10 @@ class CategoryController extends Controller
             'name' => ['required', 'min:3']
         ]);
         $name = request()->name;
+        $posts = request()->post->id;
         $slug = Str::slug($request->name, '-');
+        $post = Post::findOrFail($posts);
+        $post->categories()->attach($posts);
 
         Category::create([
             'name' => $name,
@@ -88,6 +91,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return to_route('categories.index')->with('message','Delete Category Done');
+        return to_route('categories.index')->with('message', 'Delete Category Done');
     }
 }

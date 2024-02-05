@@ -6,7 +6,8 @@ use App\Models\Post;
 // use App\Models\User;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
-// use App\Models\Category;
+use Illuminate\Support\Facades\DB;
+use App\Models\Category;
 // use App\Models\PostCategory;
 use Illuminate\Support\Str;
 
@@ -24,7 +25,7 @@ class PostController extends Controller
         // $categoryFormDB = Category::get();
         // dd($postFormDB);
         return view('news.index', ['posts' => $postsFormDB/* , 'categories' => $categoryFormDB */]);
-        // return view('post.index', ['posts' => $postsFromDB]);
+        
     }
 
     /**
@@ -32,7 +33,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('news.create');
+        $categoriesDB = Category::all();
+        return view('news.create', ['categories' => $categoriesDB]);
     }
 
     /**
@@ -40,24 +42,19 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-
         request()->validate([
             'title' => ['required', 'min:3'],
             'content' => ['required', 'min:3'],
             'image' => 'required | mimes:jpg,png,jped|max:5048',
-
         ]);
         $slug = Str::slug($request->title, '-');
         $newImageName = uniqid() . '-' . $slug . '.' . $request->image->extension();
         $request->image->move(public_path('images'), $newImageName);
-
         // dd($newImageName);
-
         $title = request()->title;
         $content = request()->content;
-
-
-        // dd($title);
+        $categoris = request()->category;
+        $id = DB::table('posts')->max('id') + 1;
 
         Post::create([
             'title' => $title,
@@ -65,10 +62,9 @@ class PostController extends Controller
             'slug' => $slug,
             'post_image' => $newImageName,
             'user_id' => auth()->user()->id,
-
-
-
         ]);
+        $category = Category::findOrFail($categoris);
+        $category->posts()->attach($id);
         return to_route('posts.index')->with('message', 'Will Don Created News');
     }
 
@@ -77,6 +73,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        // $category = Post::with('categories')->get();
         return view('news.show', ['post' => $post]);
     }
 
@@ -85,7 +82,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('news.edit', ['post' => $post]);
+        $category = Category::all();
+        return view('news.edit', ['post' => $post, 'categories' => $category]);
     }
 
     /**
@@ -107,6 +105,10 @@ class PostController extends Controller
         $title = request()->title;
         $content = request()->content;
         $updatePost = Post::findOrFail($post->id);
+        $categoris = request()->category;
+        $category = Post::findOrFail($post->id);
+        $category->categories()->sync($categoris);
+
         $updatePost->update([
             'title' => $title,
             'content' => $content,
@@ -114,6 +116,7 @@ class PostController extends Controller
             'post_image' => $newImageName,
             'user_id' => auth()->user()->id,
         ]);
+
 
 
 
@@ -125,7 +128,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-
+        $post->categories()->detach();
         $post->delete();
         return to_route('posts.index');
     }
