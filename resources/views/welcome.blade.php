@@ -112,6 +112,9 @@
                     <input id="newsletter1" type="text" name="email" class="form-control" placeholder="Email address">
                     <button class="btn btn-secondary col-4" type="submit">Subscribe</button>
                 </div>
+                @error('email')
+                    <div class="alert alert-danger mx-auto p-1 mt-1">{{ $message }}</div>
+                @enderror
             </form>
         </div>
     </div>

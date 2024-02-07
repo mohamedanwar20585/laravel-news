@@ -7,10 +7,18 @@
         </div>
     @endif
     {{-- start show posts --}}
-    <div class="container pt-5">
-
-        <div class=" col-xxl-8 px-4 py-5">
-            <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div class="container pt-3">
+        @if (Auth::user() && Auth::user()->id == $post->user_id)
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-success btn-sm px-4 col-1">
+                    Edit</a>
+                <a href="{{ route('posts.show', $post->id) }}" class="btn btn-danger btn-sm px-4 col-1" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+                    Delete</a>
+            </div>
+        @endif
+        <div class=" col-xxl-8 px-4 py-1">
+            <div class="row flex-lg-row-reverse align-items-center g-5 py-1">
                 <div class="col-10 col-sm-8 col-lg-6 mx-auto">
                     <img src="{{ url('images') }}/{{ $post->post_image }}" class="d-block mx-lg-auto img-fluid"
                         alt="Bootstrap Themes" width="700" height="500" loading="lazy">
@@ -27,24 +35,133 @@
                     <div class="mb-1 text-body-secondary">
                         {{ $post->created_at ? $post->created_at->format('Y-m-d') : 'not found date' }}</div>
                     <p class="overflow-hidden ">{{ $post->content }}</p>
-                    @if (Auth::user() && Auth::user()->id == $post->user_id)
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-success btn-lg px-4 col-4">
-                                Edit</a>
-                            <a href="{{ route('posts.show', $post->id) }}" class="btn btn-danger btn-lg px-4 col-4"
-                                data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                Delete</a>
-                        </div>
-                    @endif
-
-
-
                 </div>
             </div>
         </div>
     </div>
 
     {{-- end show posts --}}
+
+
+    <!-- Contenedor Principal -->
+    <div class="container">
+
+        @foreach ($comments as $comment)
+            @if ($post->id === $comment->post_id)
+                <div class="feed__view-comments-wrapper py-3">
+                    <div class="comment-cmn__user-pic">
+                        <i class="fas fa-user-circle fa-2x" aria-hidden="true"></i>
+                    </div>
+                    <div class="card card-body">
+                        <div class="feed__view-comments--user-name">
+                            {{ $comment->user->name }}
+                        </div>
+                        {{ $comment->comment }}
+                    </div>
+
+                </div>
+            @endif
+        @endforeach
+        <a class="btn btn-secondary" data-toggle="collapse" href="#collapsibleComment" role="button" aria-expanded="false"
+            aria-controls="collapsibleComment">
+            <i class="far fa-comment"></i> <span class="">Comment</span>
+        </a>
+
+        <!-----comment-Modal-START------>
+        @if (Auth::user())
+            <div class="collapse pt-2" id="collapsibleComment">
+                <form action="{{ route('posts.comments.store', $post->id) }}" method="post">
+                    @csrf
+                    <div class="feed__add-comment-wrapper">
+                        <div class="comment-cmn__user-pic">
+                            <i class="fas fa-user-circle fa-2x" aria-hidden="true"></i>
+                        </div>
+                        <input type="hidden" name="postid" value="{{ $post->id }}">
+                        <div class="card card-body">
+                            <textarea class="p-3" name="comment">{{ old('comment') }}</textarea>
+                        </div>
+                        @error('image')
+                            <div class="alert alert-danger mx-auto p-1 ">{{ $message }}
+                            </div>
+                        @enderror
+
+                        <button type="submit" class="add-comment-cmn__submit-icon btn btn-secondary"><i
+                                class="fas fa-paper-plane "></i></button>
+
+                    </div>
+                </form>
+                {{-- <div class="feed__view-comments-wrapper">
+                <div class="comment-cmn__user-pic">
+                    <i class="fas fa-user-circle fa-2x" aria-hidden="true"></i>
+                </div>
+                <div class="card card-body">
+                    <div class="feed__view-comments--user-name">
+                        Vincent Lawson
+                    </div>
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil
+                    anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                </div>
+                 <div class="feed-comments__replies">
+                    <a class="cmmn__reply-action" data-toggle="collapse" href="#replyCollapsibleComment" role="button"
+                        aria-expanded="false" aria-controls="replyCollapsibleComment">Reply</a> |
+
+                    <a class="cmn__view-all-replies" data-toggle="collapse" href="#viewAllComments" role="button"
+                        aria-expanded="false" aria-controls="viewAllComments">1 Reply</a>
+                </div> --}}
+            </div>
+        @else
+            <div class="collapse pt-2 " id="collapsibleComment">
+                <div class="alert alert-danger mx-auto p-1 d-inline-flex"> Please log in to your account
+                </div>
+            </div>
+        @endif
+
+
+        {{-- <!-----For Reply Button START-->
+            <div class="collapse" id="replyCollapsibleComment">
+                <div class="card card-body">
+                    <textarea></textarea>
+                </div>
+                <div class="add-comment-cmn__submit-icon">
+                    <a href="#"><i class="fas fa-paper-plane"></i></a>
+                </div>
+            </div>
+            <!-----For Reply Button END-->
+
+            <!-----TO VIEW COMMENTS START-->
+            <div class="collapse" id="viewAllComments">
+                <div class="comment-cmn__user-pic">
+                    <i class="fas fa-user-circle fa-2x" aria-hidden="true"></i>
+                </div>
+                <div class="card card-body">
+                    <div class="feed__view-comments--user-name">
+                        Lawson Vincent
+                    </div>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                    scrambled it to make a type specimen book. It has
+                    survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
+                    unchanged.
+                </div>
+                <div class="feed-comments__replies">
+                    <a class="cmmn__reply-action" data-toggle="collapse" href="#replyCollapsibleCommentSecondary"
+                        role="button" aria-expanded="false" aria-controls="replyCollapsibleComment">Reply</a>
+                </div>
+
+            </div>
+
+            <div class="collapse" id="replyCollapsibleCommentSecondary">
+                <div class="card card-body">
+                    <textarea></textarea>
+                </div>
+                <div class="add-comment-cmn__submit-icon">
+                    <a href="#"><i class="fas fa-paper-plane"></i></a>
+                </div>
+            </div>
+            <!-----TO VIEW COMMENTS END-->
+        
+        <!----#collapsibleCommentEND-----> --}}
+    </div>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

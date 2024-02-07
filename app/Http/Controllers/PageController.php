@@ -35,7 +35,7 @@ class PageController extends Controller
     public function store(StoreSubscriberRequest $request)
     {
         request()->validate([
-            'email' => ['required', 'min:3'],
+            'email' => ['required', 'min:3', 'email'],
 
         ]);
         $email = request()->email;

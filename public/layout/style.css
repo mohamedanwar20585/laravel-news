@@ -1,0 +1,167 @@
+
+/* ---------------------------------------------------
+  COMMENT MODAL SECTION STYLE START
+----------------------------------------------------- */
+.main-page-cmmn-feed-card__footer--social-icons a{
+    text-decoration: none;
+    color: #2A282F;
+}
+#collapsibleComment{
+ width: 100%;
+}
+
+/****View Comments******/
+
+.feed__add-comment-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: row;
+}
+
+.comment-cmn__user-pic{
+ order: 1;
+ margin: 0 1rem 0 0rem;
+}
+.feed__add-comment-wrapper .card{
+    margin: 1rem 0;
+    border-radius: 30px;
+    order: 2;
+}
+
+.feed__add-comment-wrapper .card.card-body{
+    font-size: 0.75rem;
+    padding: 0;
+}
+.add-comment-cmn__submit-icon{
+ order: 3;
+ background-color: #1777BE;
+ color: #fff;
+ padding: 0.5rem 1rem;
+ border-radius: 5px;
+ margin: 0 0 0 .5rem;
+ cursor: pointer;
+}
+
+.add-comment-cmn__submit-icon a{
+    text-decoration: none;
+    color: #fff;
+}
+
+
+/****View Comments******/
+.feed__view-comments-wrapper{
+    /* display: flex;
+    flex-wrap: wrap;
+    flex-direction: row; */
+}
+
+.feed__view-comments-wrapper .card,
+#viewAllComments .card{
+    margin: 0rem 0;
+    border-radius: 0 20px 20px 30px;
+    /* order: 2; */
+    width: 80%;
+    background-color: #efefef;
+    border: none;
+    display: inline-block;
+}
+
+.feed__view-comments-wrapper .card.card-body,
+#viewAllComments .card.card-body{
+    font-size: 0.75rem;
+    padding: 0.5rem 0.5rem 1rem 1rem;
+}
+
+
+.feed__view-comments-wrapper .comment-cmn__user-pic{
+ float: left;
+ margin: 0rem 1rem 0rem 1rem;
+}
+
+.feed__view-comments--user-name{
+    font-weight: 600;
+    margin-bottom: .5rem;
+}
+
+.feed-comments__replies{
+    display: inline-block;
+    margin-left: 5rem;
+}
+
+.feed-comments__replies a{
+    text-decoration: none;
+    font-size: 0.75rem;
+    color: #2A282F;
+}
+
+#replyCollapsibleComment,
+#collapsibleComment{
+    width: 100%;
+}
+#replyCollapsibleCommentSecondary{
+    margin: 0.5rem 0rem 0rem 1rem;
+    width: 96%;
+}
+#replyCollapsibleComment .card,
+#replyCollapsibleCommentSecondary .card{
+    border-radius: 30px;
+}
+#replyCollapsibleCommentSecondary .card{
+    float: left;
+}
+
+#replyCollapsibleComment .card.card-body,
+#replyCollapsibleCommentSecondary .card.card-body{
+    width: 70%;
+    margin-left: 4rem;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0.2rem;
+}
+#collapsibleComment .card.card-body {
+    
+}
+
+#replyCollapsibleComment .add-comment-cmn__submit-icon,
+#replyCollapsibleCommentSecondary .add-comment-cmn__submit-icon{
+   display: inline-block;
+}
+
+#replyCollapsibleComment .card.card-body textarea,
+#replyCollapsibleCommentSecondary .card.card-body textarea,
+#collapsibleComment .card.card-body textarea{
+    width: 100%;
+    border-radius: 30px;
+    padding: 0rem;
+    font-size: 0.75rem;
+    color: #2A282F;
+    border: none;
+    overflow: auto;
+}
+#collapsibleComment .card.card-body textarea{
+    padding: 0.5rem;
+}
+#viewAllComments{
+ margin: 1rem 1rem 0rem 2rem;
+}
+#viewAllComments .comment-cmn__user-pic{
+ float: left;
+}
+#viewAllComments .card{
+    width: 85%;
+}
+
+#viewAllComments .card.card-body{
+    font-size: 0.75rem;
+}
+
+
+#viewAllComments .feed__view-comments--user-name {
+    font-weight: 600;
+    margin-bottom: .5rem;
+}
+
+/* ---------------------------------------------------
+  COMMENT MODAL SECTION STYLE END
+----------------------------------------------------- */

@@ -8,7 +8,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Category;
-// use App\Models\PostCategory;
+use App\Models\Comment;
 use Illuminate\Support\Str;
 
 
@@ -25,7 +25,6 @@ class PostController extends Controller
         // $categoryFormDB = Category::get();
         // dd($postFormDB);
         return view('news.index', ['posts' => $postsFormDB/* , 'categories' => $categoryFormDB */]);
-        
     }
 
     /**
@@ -73,8 +72,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $commentDB = Comment::orderBy('id', 'DESC')->get();
         // $category = Post::with('categories')->get();
-        return view('news.show', ['post' => $post]);
+        return view('news.show', ['post' => $post, 'comments' => $commentDB]);
     }
 
     /**
