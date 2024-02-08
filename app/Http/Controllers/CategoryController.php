@@ -54,7 +54,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('categories.show', ['category' => $category]);
+        $categoryDB = Category::all();
+
+        return view('categories.show', ['category' => $category, 'categories' => $categoryDB]);
     }
 
     /**
@@ -62,7 +64,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('categories.edit', ['category' => $category]);
+        $categoryDB = Category::all();
+        return view('categories.edit', ['category' => $category, 'categories' => $categoryDB]);
     }
 
     /**

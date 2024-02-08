@@ -22,9 +22,10 @@ class PostController extends Controller
     {
         // $postsFormDB = Post::orderBy('id', 'DESC')->get();
         $postsFormDB = Post::with('categories')->orderBy('id', 'DESC')->get();
+        $categoryDB = Category::all();
         // $categoryFormDB = Category::get();
         // dd($postFormDB);
-        return view('news.index', ['posts' => $postsFormDB/* , 'categories' => $categoryFormDB */]);
+        return view('news.index', ['posts' => $postsFormDB, 'categories' => $categoryDB]);
     }
 
     /**
@@ -73,8 +74,9 @@ class PostController extends Controller
     public function show(Post $post/* , Comment $comment */)
     {
         $commentDB = Comment::orderBy('id', 'DESC')->get();
+        $categoryDB = Category::all();
         // $category = Post::with('categories')->get();
-        return view('news.show', ['post' => $post, 'comments' => $commentDB/* , 'comment' => $comment */]);
+        return view('news.show', ['post' => $post, 'comments' => $commentDB,  'categories' => $categoryDB]);
     }
 
     /**
@@ -83,6 +85,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $category = Category::all();
+
 
         return view('news.edit', ['post' => $post, 'categories' => $category]);
     }

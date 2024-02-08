@@ -29,7 +29,8 @@
             <div class="container">
 
                 <a class="navbar-brand " href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    Home
+                    {{-- {{ config('app.name', 'Laravel') }} --}}
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -40,27 +41,24 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('posts.index') }}">All</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Business</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Arts & Culture</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Our Magazine</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Sports</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">ET Scenes</a>
-                        </li>
-
-                    </ul>
+                    
+                    <div class="dropdown m-1  ">
+                        <button class="nav-link dropdown-toggle btn-sm " type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            News
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item px-2">
+                                <a class="nav-link" href="{{ route('posts.index') }}">All News</a>
+                            </li>
+                            @foreach ($categories as $category)
+                                <li class="nav-item px-2">
+                                    <a class="nav-link"
+                                        href="{{ route('categories.show', $category) }}">{{ $category->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -80,7 +78,8 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="nav-link text-success " href="{{ route('posts.create') }}">Create
                                             News</a></li>
-                                    <li><a class="nav-link  " href="{{ route('categories.index') }}">Categories News</a>
+                                    <li><a class="nav-link  " href="{{ route('categories.index') }}">Categories
+                                            News</a>
                                     </li>
                                     <li><a class="dropdown-item" href="#">Something else here</a></li>
                                 </ul>
