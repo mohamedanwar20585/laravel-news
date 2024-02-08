@@ -52,7 +52,7 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        //
+        return view('comments.show', ['comment' => $comment]);
     }
 
     /**
@@ -60,7 +60,9 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        //
+        // dd($comment);
+
+        return view('comments.edit', ['comment' => $comment]);
     }
 
     /**
@@ -68,7 +70,27 @@ class CommentController extends Controller
      */
     public function update(UpdateCommentRequest $request, Comment $comment)
     {
-        //
+        request()->validate([
+            'content' => ['required', 'min:3', 'max:1000'],
+
+        ]);
+        // dd($comment);
+        $content = request()->content;
+        $postid = $comment->post_id;
+
+        // dd($content, $postid);
+        $updatecomment = Comment::find($comment->id);
+        // dd($content, $postid ,$updatecomment);
+        $updatecomment->update([
+            'comment' => $content,
+            'post_id' => $postid,
+            'user_id' => auth()->user()->id,
+
+        ]);
+        // dd($content, $postid ,$updatecomment);
+
+
+        return to_route('posts.show',  ['post' => $postid])->with('message', 'Well Done , Update comment');
     }
 
     /**
@@ -76,6 +98,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+        return to_route('posts.show', $comment->post_id);
     }
 }

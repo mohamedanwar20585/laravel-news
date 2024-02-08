@@ -70,11 +70,11 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show(Post $post/* , Comment $comment */)
     {
         $commentDB = Comment::orderBy('id', 'DESC')->get();
         // $category = Post::with('categories')->get();
-        return view('news.show', ['post' => $post, 'comments' => $commentDB]);
+        return view('news.show', ['post' => $post, 'comments' => $commentDB/* , 'comment' => $comment */]);
     }
 
     /**
@@ -83,6 +83,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $category = Category::all();
+
         return view('news.edit', ['post' => $post, 'categories' => $category]);
     }
 

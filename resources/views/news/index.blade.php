@@ -42,7 +42,7 @@
                         <p class="lead overflow-hidden">{{ $post->content }}</p>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                             <a href="{{ route('posts.show', $post->id) }}"
-                                class="btn btn-secondary btn-lg px-4 col-6">Continue reading</a>
+                                class="btn btn-secondary btn-sm px-2 col-4 col-md-3">Continue reading</a>
                         </div>
                     </div>
                 </div>

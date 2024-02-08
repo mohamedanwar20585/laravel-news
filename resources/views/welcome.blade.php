@@ -2,7 +2,7 @@
 
 @section('content')
     {{-- start Carousel --}}
-    <div class="container py-5">
+    <div class="container py-5 col-12 col-md-8">
         <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class=""

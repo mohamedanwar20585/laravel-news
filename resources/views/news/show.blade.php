@@ -57,6 +57,13 @@
                             {{ $comment->user->name }}
                         </div>
                         {{ $comment->comment }}
+                        @if (Auth::user() && Auth::user()->id == $comment->user_id)
+                            <div class="">
+                                <a href="{{ route('comments.edit', $comment) }}" class="btn btn-secondary btn-sm px-4 ">
+                                    Edit &
+                                    Delete</a>
+                            </div>
+                        @endif
                     </div>
 
                 </div>
@@ -90,24 +97,7 @@
 
                     </div>
                 </form>
-                {{-- <div class="feed__view-comments-wrapper">
-                <div class="comment-cmn__user-pic">
-                    <i class="fas fa-user-circle fa-2x" aria-hidden="true"></i>
-                </div>
-                <div class="card card-body">
-                    <div class="feed__view-comments--user-name">
-                        Vincent Lawson
-                    </div>
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil
-                    anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                </div>
-                 <div class="feed-comments__replies">
-                    <a class="cmmn__reply-action" data-toggle="collapse" href="#replyCollapsibleComment" role="button"
-                        aria-expanded="false" aria-controls="replyCollapsibleComment">Reply</a> |
 
-                    <a class="cmn__view-all-replies" data-toggle="collapse" href="#viewAllComments" role="button"
-                        aria-expanded="false" aria-controls="viewAllComments">1 Reply</a>
-                </div> --}}
             </div>
         @else
             <div class="collapse pt-2 " id="collapsibleComment">
@@ -117,71 +107,29 @@
         @endif
 
 
-        {{-- <!-----For Reply Button START-->
-            <div class="collapse" id="replyCollapsibleComment">
-                <div class="card card-body">
-                    <textarea></textarea>
-                </div>
-                <div class="add-comment-cmn__submit-icon">
-                    <a href="#"><i class="fas fa-paper-plane"></i></a>
-                </div>
-            </div>
-            <!-----For Reply Button END-->
 
-            <!-----TO VIEW COMMENTS START-->
-            <div class="collapse" id="viewAllComments">
-                <div class="comment-cmn__user-pic">
-                    <i class="fas fa-user-circle fa-2x" aria-hidden="true"></i>
-                </div>
-                <div class="card card-body">
-                    <div class="feed__view-comments--user-name">
-                        Lawson Vincent
+        <!-- Modal delete post -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete News</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                    scrambled it to make a type specimen book. It has
-                    survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
-                    unchanged.
-                </div>
-                <div class="feed-comments__replies">
-                    <a class="cmmn__reply-action" data-toggle="collapse" href="#replyCollapsibleCommentSecondary"
-                        role="button" aria-expanded="false" aria-controls="replyCollapsibleComment">Reply</a>
-                </div>
-
-            </div>
-
-            <div class="collapse" id="replyCollapsibleCommentSecondary">
-                <div class="card card-body">
-                    <textarea></textarea>
-                </div>
-                <div class="add-comment-cmn__submit-icon">
-                    <a href="#"><i class="fas fa-paper-plane"></i></a>
-                </div>
-            </div>
-            <!-----TO VIEW COMMENTS END-->
-        
-        <!----#collapsibleCommentEND-----> --}}
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete News</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Are You sure Delete news ?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <form action="{{ route('posts.destroy', $post->id) }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <input type="submit" value="Delete News" class="btn btn-danger">
-                    </form>
+                    <div class="modal-body">
+                        Are You sure Delete news ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <form action="{{ route('posts.destroy', $post->id) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" value="Delete News" class="btn btn-danger">
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+        <!--end Modal delete post -->
+
+    @endsection
