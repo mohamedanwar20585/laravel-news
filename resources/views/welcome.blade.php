@@ -69,7 +69,7 @@
     {{-- {{$categories}} --}}
     <div class="container">
         @foreach ($categories as $category)
-            <h4>{{ $category->name }} </h4>
+            <a href="{{route('categories.show',$category)}}" class="nav-link">{{ $category->name }} </a>
             <div class="album py-3 bg-body-tertiary ">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3  ">
                     @foreach ($category->posts->take(3) as $post)
