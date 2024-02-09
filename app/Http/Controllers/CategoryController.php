@@ -24,8 +24,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $categoryDB = Category::all();
 
-        return view('categories.create');
+        return view('categories.create', ['categories' => $categoryDB]);
     }
 
     /**

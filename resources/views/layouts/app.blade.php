@@ -58,13 +58,6 @@
                                             href="{{ route('categories.show', $category) }}">{{ $category->name }}</a>
                                     </li>
                                 @endforeach
-
-                                @foreach ($categories as $category)
-                                    <li class="nav-item px-2">
-                                        <a class="nav-link"
-                                            href="{{ route('categories.show', $category) }}">{{ $category->name }}</a>
-                                    </li>
-                                @endforeach
                             </ul>
                         </div>
                     @else

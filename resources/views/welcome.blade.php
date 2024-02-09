@@ -83,11 +83,11 @@
                                     <p class="card-text">{{ $post->content }}</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <a type="button" href="{{ route('posts.show', $post->id) }}"
+                                            <a class="btn btn-secondary" href="{{ route('posts.show', $post->id) }}"
                                                 class="btn btn-sm btn-outline-secondary">View</a>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            {{-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> --}}
                                         </div>
-                                        <small class="text-body-secondary">9 mins</small>
+                                        {{-- <small class="text-body-secondary">9 mins</small> --}}
                                     </div>
                                 </div>
                             </div>
