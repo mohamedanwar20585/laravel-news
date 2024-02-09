@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Category - ')
-@if (Auth::check())
-    @section('content')
+@section('content')
+    @if (Auth::check())
         @if (session()->has('message'))
             <div class="alert alert-primary text-center" role="alert">
                 {{ session()->get('message') }}
@@ -71,7 +71,22 @@
                 </div>
             </div>
         </div>
+    @else
+        <div class="container  pt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header text-success">
+                            Category
+                        </div>
+                        <div class="card-body py-5 my-5 text-center text-danger">
+                            please login to your account
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 
-        {{-- end all category --}}
-    @endsection
-@endif
+    {{-- end all category --}}
+@endsection
