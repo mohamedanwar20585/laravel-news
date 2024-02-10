@@ -15,8 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categoryDB = Category::all();
-        return view('categories.index', ['categories' => $categoryDB]);
+        // $categoryDB = Category::all();
+        return view('categories.index', /* ['categories' => $categoryDB] */);
     }
 
     /**
@@ -24,9 +24,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categoryDB = Category::all();
+        // $categoryDB = Category::all();
 
-        return view('categories.create', ['categories' => $categoryDB]);
+        return view('categories.create'/* , ['categories' => $categoryDB] */);
     }
 
     /**
@@ -55,9 +55,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $categoryDB = Category::all();
+        // $categoryDB = Category::all();
 
-        return view('categories.show', ['category' => $category, 'categories' => $categoryDB]);
+        return view('categories.show', ['category' => $category/* , 'categories' => $categoryDB */]);
     }
 
     /**
@@ -65,8 +65,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        $categoryDB = Category::all();
-        return view('categories.edit', ['category' => $category, 'categories' => $categoryDB]);
+        // $categoryDB = Category::all();
+        return view('categories.edit', ['category' => $category/* , 'categories' => $categoryDB */]);
     }
 
     /**

@@ -41,28 +41,28 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    @if (Auth::check())
-                        <div class="dropdown m-1  ">
-                            <button class="nav-link dropdown-toggle btn-sm " type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                News
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item px-2">
-                                    <a class="nav-link" href="{{ route('posts.index') }}">All News</a>
-                                </li>
+                    {{-- @if (Auth::check()) --}}
+                    <div class="dropdown m-1  ">
+                        <button class="nav-link dropdown-toggle btn-sm " type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            News
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item px-2">
+                                <a class="nav-link" href="{{ route('posts.index') }}">All News</a>
+                            </li>
 
-                                @foreach ($categories as $category)
-                                    <li class="nav-item px-2">
-                                        <a class="nav-link"
-                                            href="{{ route('categories.show', $category) }}">{{ $category->name }}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @else
-                        <a class="nav-link" href="{{ route('posts.index') }}">All News</a>
-                    @endif
+                            @foreach ($categories as $category)
+                                <li class="nav-item px-2">
+                                    <a class="nav-link"
+                                        href="{{ route('categories.show', $category) }}">{{ $category->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    {{-- @else --}}
+                    {{-- <a class="nav-link" href="{{ route('posts.index') }}">All News</a> --}}
+                    {{-- @endif --}}
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">

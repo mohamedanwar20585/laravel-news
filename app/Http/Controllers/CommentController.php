@@ -16,9 +16,9 @@ class CommentController extends Controller
     public function index()
     {
         $commentDB = Comment::orderBy('id', 'DESC')->get();
-        $categoryDB = Category::all();
+        // $categoryDB = Category::all();
         // dd($commentDB);
-        return to_route('news.show', ['comments' => $commentDB, 'categories' => $categoryDB]);
+        return to_route('news.show', ['comments' => $commentDB/* , 'categories' => $categoryDB */]);
     }
 
     /**
@@ -55,8 +55,8 @@ class CommentController extends Controller
     public function show(Comment $comment)
 
     {
-        $categoryDB = Category::all();
-        return view('comments.show', ['comment' => $comment, 'categories' => $categoryDB]);
+        // $categoryDB = Category::all();
+        return view('comments.show', ['comment' => $comment/* , 'categories' => $categoryDB */]);
     }
 
     /**
@@ -65,9 +65,9 @@ class CommentController extends Controller
     public function edit(Comment $comment)
     {
         // dd($comment);
-        $categoryDB = Category::all();
+        // $categoryDB = Category::all();
 
-        return view('comments.edit', ['comment' => $comment, 'categories' => $categoryDB]);
+        return view('comments.edit', ['comment' => $comment/* , 'categories' => $categoryDB */]);
     }
 
     /**
