@@ -46,4 +46,5 @@ class PageController extends Controller
         ]);
         return to_route('welcome');
     }
+   
 }
