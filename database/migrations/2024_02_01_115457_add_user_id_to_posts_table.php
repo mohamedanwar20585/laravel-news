@@ -17,7 +17,7 @@ return new class extends Migration
             $table->boolean('post_approval')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-        });
+        }); 
     }
 
     /**

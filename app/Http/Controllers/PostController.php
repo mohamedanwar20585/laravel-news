@@ -45,7 +45,7 @@ class PostController extends Controller
         request()->validate([
             'title' => ['required', 'min:3'],
             'content' => ['required', 'min:3'],
-            'image' => 'required | mimes:jpg,png,jped|max:5048',
+            'image' => 'required | mimes:jpg,png,jped|max:5048', 
         ]);
         $slug = Str::slug($request->title, '-');
         $newImageName = uniqid() . '-' . $slug . '.' . $request->image->extension();
